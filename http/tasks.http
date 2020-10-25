@@ -1,0 +1,57 @@
+###
+GET {{baseUrl}}/tasks HTTP/1.1
+Authorization: {{token}}
+
+###
+GET {{baseUrl}}/tasks?status=DONE&search=SHI HTTP/1.1
+Authorization: {{token}}
+
+###
+//invalid filter request
+GET {{baseUrl}}/tasks?status=ded&search= HTTP/1.1
+Authorization: {{token}}
+
+###
+
+POST {{baseUrl}}/tasks HTTP/1.1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "title":"Share market",
+    "description":"I should remember to check SHIVAM shares"
+}
+###
+//invalid request
+POST {{baseUrl}}/tasks HTTP/1.1
+Content-Type: application/json
+
+{
+    "title":"",
+    "description":"I should remember to check SHIVAM shares"
+}
+###
+
+PATCH  {{baseUrl}}/tasks/{{taskId}}/status HTTP/1.1
+Content-Type: application/json
+
+{
+    "status":"DONE"
+}
+
+###
+//invalid status request
+PATCH  {{baseUrl}}/tasks/{{taskId}}/status HTTP/1.1
+Content-Type: application/json
+
+{
+    "status":"in_progres"
+}
+
+###
+
+GET {{baseUrl}}/tasks/{{taskId}} HTTP/1.1
+
+###
+
+DELETE {{baseUrl}}/tasks/{{taskId}} HTTP/1.1

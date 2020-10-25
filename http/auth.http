@@ -1,0 +1,21 @@
+###
+POST {{baseUrl}}/auth/signup HTTP/1.1
+content-type: application/json
+
+{
+    "username":"dlohani",
+    "password":"##d3dsf219Adx"
+}
+###
+
+POST {{baseUrl}}/auth/signin HTTP/1.1
+content-type: application/json
+
+{
+    "username":"dlohani",
+    "password":"##d3dsf219Adx"
+}
+> {% client.global.set("token", "Bearer " + response.body.accessToken); %}
+###
+POST {{baseUrl}}/auth/test HTTP/1.1
+Authorization: {{token}}
