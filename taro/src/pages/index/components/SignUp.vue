@@ -16,6 +16,7 @@
 <script>
 import { ref, computed, onMounted, toRefs, watch, reactive } from 'vue'
 import api from '../../../network/api.network';
+import {useRequest} from "@felibs/request";
 export default {
   name: 'SignUp',
   components: {},
@@ -30,12 +31,12 @@ export default {
     const changePassword = (value = 'value') => {
       form.password = value
     }
-    const signup = async () => {
+    const { data, loading, error, run: signup, cancel } = useRequest(async () => {
       await api.auth.signup(form)
       await Taro.showToast({
         title: '注册成功',
       })
-    }
+    }, {manual: true,});
     return {
       form,
       changeUsername,
@@ -92,67 +93,3 @@ export default {
   }
 }
 </style>
-
-/* Input/Text */
-
-position: absolute;
-height: 50px;
-left: 16px;
-right: 16px;
-top: 128px;
-
-
-
-/* BG */
-
-position: absolute;
-left: 0%;
-right: 0%;
-top: 0%;
-bottom: 0%;
-
-/* Gray/01 */
-background: #F6F6F6;
-/* Gray/02 */
-border: 1px solid #E8E8E8;
-box-sizing: border-box;
-border-radius: 8px;
-
-
-/* Name */
-
-position: absolute;
-width: 45px;
-height: 19px;
-left: 16px;
-top: calc(50% - 19px/2 + 0.5px);
-
-/* UI - 16 Medium */
-font-family: Inter;
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 19px;
-
-/* Gray/03 */
-color: #BDBDBD;
-
-
-/* Show */
-
-position: absolute;
-visibility: hidden;
-width: 43px;
-height: 19px;
-right: 16px;
-top: calc(50% - 19px/2 + 0.5px);
-
-font-family: Inter;
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 19px;
-text-align: right;
-
-/* Green/Primary */
-color: #5DB075;
