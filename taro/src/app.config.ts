@@ -1,6 +1,8 @@
 export default {
   pages: [
-    'pages/index/index'
+    'pages/signUp/signUp',
+    'pages/index/index',
+    'pages/signIn/signIn'
   ],
   window: {
     backgroundTextStyle: 'light',

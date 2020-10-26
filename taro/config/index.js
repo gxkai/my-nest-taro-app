@@ -1,3 +1,4 @@
+const path = require('path')
 const config = {
   projectName: 'taro',
   date: '2020-10-25',
@@ -20,6 +21,13 @@ const config = {
     }
   },
   framework: 'vue3',
+  alias: {
+    '@components': path.resolve(__dirname, '..', 'src/components'),
+    '@utils': path.resolve(__dirname, '..', 'src/utils'),
+    '@styles': path.resolve(__dirname, '..', 'src/styles'),
+    '@assets': path.resolve(__dirname, '..', 'src/assets'),
+    "@nestjs/*": path.resolve(__dirname, '../..', 'src'),
+  },
   mini: {
     postcss: {
       pxtransform: {

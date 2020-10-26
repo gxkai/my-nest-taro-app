@@ -8,7 +8,10 @@ const api = {
     },
     signup(data: AuthCredentialsDto) {
       return http({method: 'post',url: '/auth/signup', data})
-    }
+    },
+    signin(data: AuthCredentialsDto) {
+      return http({method: 'post',url: '/auth/signin', data})
+    },
   }
 }
 export default api

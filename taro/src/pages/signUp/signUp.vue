@@ -2,11 +2,11 @@
   <view>
     <form class="signUp__form">
       <view class="input__wrap">
-        <input @change="changeUsername" :value="form.username" placeholder="Username"/>
+        <input @change="changeUsername" v-model="form.username" placeholder="Username"/>
       </view>
       <view class="input__wrap">
-        <input @change="changePassword" :value="form.password" placeholder="password" type="password"/>
-        <text>Show</text>
+        <input  @change="changePassword" v-model="form.password" placeholder="password" :type="showPassword ? 'text' : 'password'"/>
+        <text @tap="handleShowPassword">Show</text>
       </view>
       <button @tap="signup">Sign Up</button>
     </form>
@@ -15,8 +15,8 @@
 
 <script>
 import { ref, computed, onMounted, toRefs, watch, reactive } from 'vue'
-import api from '../../../network/api.network';
 import {useRequest} from "@felibs/request";
+import api from "../../network/api.network";
 export default {
   name: 'SignUp',
   components: {},
@@ -25,6 +25,10 @@ export default {
       username: '',
       password: '',
     })
+    let showPassword = ref(false)
+    const handleShowPassword = () => {
+      showPassword.value = !showPassword.value
+    }
     const changeUsername = (value = 'value') => {
       form.username = value
     }
@@ -38,6 +42,8 @@ export default {
       })
     }, {manual: true,});
     return {
+      handleShowPassword,
+      showPassword,
       form,
       changeUsername,
       changePassword,
@@ -48,7 +54,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../../app";
+@import "@styles/variables";
 .signUp {
   &__form {
     .input__wrap {

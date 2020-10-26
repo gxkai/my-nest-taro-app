@@ -20,13 +20,16 @@
     "resolveJsonModule": true,
     "typeRoots": [
       "node_modules/@types",
-      "global.d.ts",
-      "../src/**/*.dto.ts"
+      "global.d.ts"
     ],
     "paths": {
       "@nestjs/*": [
         "../src/*"
-      ]
+      ],
+      "@components/*": ["./src/components/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@assets/*": ["./src/assets/*"]
     }
   },
   "exclude": [
