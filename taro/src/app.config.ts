@@ -1,13 +1,14 @@
 export default {
   pages: [
+    'pages/signIn/signIn',
     'pages/signUp/signUp',
     'pages/index/index',
-    'pages/signIn/signIn'
   ],
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
     navigationBarTitleText: 'WeChat',
-    navigationBarTextStyle: 'black'
+    navigationBarTextStyle: 'black',
+    navigationStyle: 'custom'
   }
 }

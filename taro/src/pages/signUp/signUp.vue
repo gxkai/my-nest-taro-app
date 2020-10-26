@@ -1,5 +1,6 @@
 <template>
   <view>
+    <header-bar  title="Sign Up"/>
     <form class="signUp__form">
       <view class="input__wrap">
         <input @change="changeUsername" v-model="form.username" placeholder="Username"/>
@@ -9,6 +10,7 @@
         <text @tap="handleShowPassword">Show</text>
       </view>
       <button @tap="signup">Sign Up</button>
+      <button @tap="handleGoToLogIn">Go To Log In</button>
     </form>
   </view>
 </template>
@@ -16,10 +18,12 @@
 <script>
 import { ref, computed, onMounted, toRefs, watch, reactive } from 'vue'
 import {useRequest} from "@felibs/request";
-import api from "../../network/api.network";
+import api from "@network/api.network";
+import HeaderBar from "@components/HeaderBar/HeaderBar";
+import Taro from "@tarojs/taro"
 export default {
   name: 'SignUp',
-  components: {},
+  components: {HeaderBar},
   setup () {
     const  form = reactive({
       username: '',
@@ -41,6 +45,9 @@ export default {
         title: '注册成功',
       })
     }, {manual: true,});
+    const handleGoToLogIn = ()=> {
+      Taro.navigateTo({url: '/pages/signIn/signIn'})
+    }
     return {
       handleShowPassword,
       showPassword,
@@ -48,6 +55,7 @@ export default {
       changeUsername,
       changePassword,
       signup,
+      handleGoToLogIn,
     }
   },
 }
@@ -62,7 +70,7 @@ export default {
       align-items: center;
       height: 50px;
       width: 343px;
-      margin: 0 auto;
+      margin: 16px auto 0;
       background-color: $gray01;
       border: 1px solid $gray02;
       box-sizing: border-box;

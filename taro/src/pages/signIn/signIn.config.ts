@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Log In'
+  navigationBarTitleText: 'Log In',
 }

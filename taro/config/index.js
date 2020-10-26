@@ -26,6 +26,8 @@ const config = {
     '@utils': path.resolve(__dirname, '..', 'src/utils'),
     '@styles': path.resolve(__dirname, '..', 'src/styles'),
     '@assets': path.resolve(__dirname, '..', 'src/assets'),
+    '@network': path.resolve(__dirname, '..', 'src/network'),
+    '@types': path.resolve(__dirname, '..', 'types'),
     "@nestjs/*": path.resolve(__dirname, '../..', 'src'),
   },
   mini: {

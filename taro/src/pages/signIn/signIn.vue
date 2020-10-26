@@ -1,5 +1,6 @@
 <template>
   <view>
+    <header-bar  title="Sign In"/>
     <form class="signIn__form">
       <view class="input__wrap">
         <input @change="changeUsername" v-model="form.username" placeholder="Username"/>
@@ -9,6 +10,7 @@
         <text @tap="handleShowPassword">Show</text>
       </view>
       <button @tap="signin">Log In</button>
+      <button @tap="wechatSignin">Log In With Wechat</button>
     </form>
   </view>
 </template>
@@ -17,9 +19,11 @@
 import { ref, computed, onMounted, toRefs, watch, reactive } from 'vue'
 import {useRequest} from "@felibs/request";
 import api from "../../network/api.network";
+import HeaderBar from "../../components/HeaderBar/HeaderBar";
+import Taro from "@tarojs/taro"
 export default {
   name: 'SignIn',
-  components: {},
+  components: {HeaderBar},
   setup () {
     const  form = reactive({
       username: '',
@@ -35,6 +39,13 @@ export default {
     const changePassword = (value = 'value') => {
       form.password = value
     }
+    const wechatSignin = () => {
+      Taro.login({
+        success: (res) => {
+          console.log(res)
+        }
+      })
+    }
     const { data, loading, error, run: signin, cancel } = useRequest(async () => {
       await api.auth.signin(form)
       await Taro.showToast({
@@ -48,6 +59,7 @@ export default {
       changeUsername,
       changePassword,
       signin,
+      wechatSignin
     }
   },
 }
@@ -62,7 +74,7 @@ export default {
       align-items: center;
       height: 50px;
       width: 343px;
-      margin: 0 auto;
+      margin: 16px auto 0;
       background-color: $gray01;
       border: 1px solid $gray02;
       box-sizing: border-box;
