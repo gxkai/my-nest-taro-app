@@ -3,6 +3,7 @@ import { EntityRepository, Repository } from "typeorm";
 import { AuthCredentialsDto } from "./dto/auth-credentials.dto";
 import { User } from "./user.entity";
 import * as bcrypt from 'bcrypt';
+import {WxAuthCredentialsDto} from "./dto/wx-auth-credentials.dto";
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User>{
@@ -30,7 +31,7 @@ export class UserRepository extends Repository<User>{
         if(user && await user.validatePassword(password)) {
             return user.username;
         }else{
-          return null;  
+          return null;
         }
     }
 
@@ -38,5 +39,17 @@ export class UserRepository extends Repository<User>{
         return bcrypt.hash(password, salt);
     }
 
-    
+    async validateOpenid(openid: string, wxAuthCredentialsDto: WxAuthCredentialsDto) {
+        const user= await this.findOne({openid});
+        const {code, ...others } = wxAuthCredentialsDto;
+        if (user) {
+            await  this.update({openid}, {username: wxAuthCredentialsDto.nickName, openid: openid, ...others});
+            return wxAuthCredentialsDto.nickName;
+        } else {
+            const salt = await bcrypt.genSalt();
+            const password = await this.hashPassword('123456', salt);
+            await this.insert({username: wxAuthCredentialsDto.nickName, password, salt , openid: openid, ...others});
+            return wxAuthCredentialsDto.nickName;
+        }
+    }
 }

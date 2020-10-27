@@ -17,6 +17,44 @@ export class User extends BaseEntity {
     @Column()
     salt: string;
 
+    // 微信
+
+    @Column({
+        nullable: true
+    })
+    openid: string;
+
+    @Column({
+        nullable: true
+    })
+    nickName: string;
+
+    @Column({
+        nullable: true
+    })
+    gender: number;
+    @Column({
+        nullable: true
+    })
+    language: string;
+    @Column({
+        nullable: true
+    })
+    city: string;
+    @Column({
+        nullable: true
+    })
+    province: string;
+    @Column({
+        nullable: true
+    })
+    country: string;
+    @Column({
+        nullable: true
+    })
+    avatarUrl: string;
+
+
     @OneToMany(type=> Task,task=> task.user, {eager: true})
     tasks: Task[];
 

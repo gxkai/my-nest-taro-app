@@ -10,7 +10,7 @@
         <text @tap="handleShowPassword">Show</text>
       </view>
       <button @tap="signin">Log In</button>
-      <button @tap="wechatSignin">Log In With Wechat</button>
+      <button open-type="getUserInfo" @getuserinfo="wechatSignin">Log In With Wechat</button>
     </form>
   </view>
 </template>
@@ -21,6 +21,7 @@ import {useRequest} from "@felibs/request";
 import api from "../../network/api.network";
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import Taro from "@tarojs/taro"
+import {setToken} from "../../storage/token.storage";
 export default {
   name: 'SignIn',
   components: {HeaderBar},
@@ -39,10 +40,11 @@ export default {
     const changePassword = (value = 'value') => {
       form.password = value
     }
-    const wechatSignin = () => {
+    const wechatSignin = (data)=> {
       Taro.login({
-        success: (res) => {
-          console.log(res)
+        success: async (res) => {
+          const {accessToken} = await api.auth.wxSigin({code: res.code, ...data.detail.userInfo})
+          setToken(accessToken);
         }
       })
     }
@@ -59,7 +61,7 @@ export default {
       changeUsername,
       changePassword,
       signin,
-      wechatSignin
+      wechatSignin,
     }
   },
 }

@@ -11,7 +11,7 @@ function http({method, url, data = {}, BASE_URL = process.env.BASE_URL}) {
         'token': getToken(),
       },
       success: function (res) {
-        if (res.statusCode !== 200 ) {
+        if (res.statusCode > 299 ) {
           Taro.showToast({
             title: res.data.message.join(';\n'),
             icon: 'none',

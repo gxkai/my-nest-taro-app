@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import {Module} from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TasksModule } from './tasks/tasks.module';
 import { AuthModule } from './auth/auth.module';
@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import pgConfig from './config/pg.config';
 import { Task } from './tasks/entities/task.entity';
 import { User } from './auth/user.entity';
+import wxConfig from "./config/wx.config";
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { User } from './auth/user.entity';
       envFilePath: ['.env.development.local', '.env.development'],
       ignoreEnvFile: false,
       isGlobal: true,
-      load: [pgConfig]
+      load: [pgConfig, wxConfig]
     }),
     TasksModule, TypeOrmModule.forRootAsync({
       imports: [ConfigModule],

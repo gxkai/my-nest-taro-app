@@ -1,5 +1,6 @@
 import http from './http.network';
 import { AuthCredentialsDto } from '@nestjs/auth/dto/auth-credentials.dto';
+import {WxAuthCredentialsDto} from "@nestjs/auth/dto/wx-auth-credentials.dto";
 
 const api = {
   auth: {
@@ -12,6 +13,9 @@ const api = {
     signin(data: AuthCredentialsDto) {
       return http({method: 'post',url: '/auth/signin', data})
     },
+    wxSigin(data: WxAuthCredentialsDto) {
+      return http({method: 'post', url: '/auth/wxSignin', data})
+    }
   }
 }
 export default api
