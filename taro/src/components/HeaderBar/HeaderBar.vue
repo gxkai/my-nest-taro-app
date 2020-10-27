@@ -1,7 +1,7 @@
 <template>
   <view>
     <view class="headerBar__wrap" :style="style">
-      <view class="headerBar__left">
+      <view class="headerBar__left" :style="{width: capsuleWith + 'px'}">
         <slot name="left">
           <text v-if="showBack" class="headerBar__left--text headerBar__left--back" @tap="handleBack">Back</text>
           <text v-if="showClose" class="headerBar__left--text headerBar__left--close" @tap="handleLeft">x</text>
@@ -13,7 +13,7 @@
           <text class="headerBar__center--text">{{title}}</text>
         </slot>
       </view>
-      <view class="headerBar__right">
+      <view class="headerBar__right" :style="{width: capsuleWith + 'px'}">
         <slot name="right">
           <text v-if="rightText" class="headerBar__right--text" :style="{color: rightTextColor}">{{rightText}}</text>
         </slot>
@@ -47,10 +47,11 @@ export default {
     }
     return {
       style:  {
-        paddingTop: Taro.$navBarMarginTop + 'px'
+        paddingTop: Taro.$navBarMarginTop + 'px',
       },
       handleBack,
-      handleLeft
+      handleLeft,
+      capsuleWith: Taro.$capsuleWitdh,
     }
   },
 }

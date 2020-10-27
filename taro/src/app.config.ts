@@ -1,5 +1,8 @@
 export default {
   pages: [
+    'pages/profile/profile',
+    'pages/content/content',
+    'pages/feed/feed',
     'pages/signIn/signIn',
     'pages/signUp/signUp',
     'pages/index/index',
