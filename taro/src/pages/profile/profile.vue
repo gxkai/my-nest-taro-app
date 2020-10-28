@@ -1,8 +1,6 @@
 <template>
   <layout>
-    <view class="profile__header" #header>
-      <view :style="style"></view>
-    </view>
+    <profile-header />
     <view class="profile__wrap">
     </view>
   </layout>
@@ -11,16 +9,15 @@
 <script lang="ts">
 import Layout from "@components/Layout/Layout.vue";
 import Taro from "@tarojs/taro";
+import ProfileHeader from "@components/ProfileHeader/ProfileHeader.vue";
 export default {
   name: 'Feed',
   components: {
+    ProfileHeader,
     Layout,
   },
   setup() {
     return {
-      style:  {
-        paddingTop: Taro.$navBarMarginTop + 'px',
-      },
     }
   },
   created() {

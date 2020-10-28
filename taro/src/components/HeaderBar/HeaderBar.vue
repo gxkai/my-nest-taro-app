@@ -5,17 +5,17 @@
         <slot name="left">
           <text v-if="showBack" class="headerBar__left--text headerBar__left--back" @tap="handleBack">Back</text>
           <text v-if="showClose" class="headerBar__left--text headerBar__left--close" @tap="handleLeft">x</text>
-          <text v-if="leftText" class="headerBar__left--text" :style="{color: leftTextColor}" @tap="handleLeft">{{leftText}}</text>
+          <text v-if="leftText" class="headerBar__left--text" :style="{color: textColor|| leftTextColor}" @tap="handleLeft">{{leftText}}</text>
         </slot>
       </view>
       <view class="headerBar__center">
         <slot>
-          <text class="headerBar__center--text">{{title}}</text>
+          <text class="headerBar__center--text" :style="{color: textColor }">{{title}}</text>
         </slot>
       </view>
       <view class="headerBar__right" :style="{width: capsuleWith + 'px'}">
         <slot name="right">
-          <text v-if="rightText" class="headerBar__right--text" :style="{color: rightTextColor}">{{rightText}}</text>
+          <text v-if="rightText" class="headerBar__right--text" :style="{color: textColor || rightTextColor}">{{rightText}}</text>
         </slot>
       </view>
     </view>
@@ -30,12 +30,15 @@ export default {
   name: 'HeaderBar',
   props:{
     title: {type: String},
+    titleColor: {type: String, default: ''},
+    textColor: {type: String, default: ''},
     showBack: {type: Boolean, default: false},
     showClose: {type: Boolean, default: false},
     leftText: {type: String, default: ''},
     leftTextColor: {type: String, default: ''},
     rightText: {type: String, default: ''},
     rightTextColor: {type: String, default: ''},
+    backgroundColor: {type: String, default: '#ffffff'},
   },
   components: {},
   setup (props:HeaderBarProps) {
@@ -48,6 +51,7 @@ export default {
     return {
       style:  {
         paddingTop: Taro.$navBarMarginTop + 'px',
+        backgroundColor: props.backgroundColor,
       },
       handleBack,
       handleLeft,
@@ -63,11 +67,10 @@ export default {
   &__wrap {
     display: flex;
     align-items: center;
-    width: 343px;
     height: 36px;
-    margin: 0 auto;
   }
   &__left {
+    padding-left: calc((375px - 343px) / 2);
     &--text {
       @include font16Medium;
     }
