@@ -8,6 +8,14 @@
     <view class="profileHeader__body">
         <image :src="hero"/>
     </view>
+    <view class="profileHeader__footer">
+      <view class="profileHeader__footer--name">
+        {{name}}
+      </view>
+      <view class="profileHeader__footer--mantra">
+        {{mantra}}
+      </view>
+    </view>
   </view>
 </template>
 <script lang="ts">
@@ -18,6 +26,14 @@ export default {
     hero: {
       type: String,
       default: require('@assets/images/hero.png')
+    },
+    name: {
+      type: String,
+      default: 'Victoria Robertson'
+    },
+    mantra: {
+      type: String,
+      default: 'A mantra goes here'
     }
   },
   components: {HeaderBar}
@@ -42,6 +58,19 @@ export default {
     box-sizing: border-box;
     filter: drop-shadow(0px 4px 20px rgba(101, 101, 101, 0.15));
     border-radius: 50%;
+  }
+}
+.profileHeader__footer {
+  margin-top: 57px;
+  &--name {
+    @include font30Semi;
+    color: $black;
+    text-align: center;
+  }
+  &--mantra {
+    @include font16Semi;
+    color: $black;
+    text-align: center;
   }
 }
 </style>
