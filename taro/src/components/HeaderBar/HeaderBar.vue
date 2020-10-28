@@ -23,7 +23,6 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, onMounted, toRefs, watch, reactive } from 'vue'
 import {HeaderBarProps} from "@types/HeaderBar";
 import Taro from '@tarojs/taro'
 export default {
@@ -50,7 +49,7 @@ export default {
     }
     return {
       style:  {
-        paddingTop: Taro.$navBarMarginTop + 'px',
+        paddingTop: Taro.$statusBarHeight + 'px',
         backgroundColor: props.backgroundColor,
       },
       handleBack,

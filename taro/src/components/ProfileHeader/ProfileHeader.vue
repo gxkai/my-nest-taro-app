@@ -1,10 +1,5 @@
 <template>
   <view class="profileHeader__wrap">
-    <header-bar
-      title="Profile"
-      left-text="Settings"
-      background-color="#5DB075"
-      text-color="#ffffff"/>
     <view class="profileHeader__body">
         <image :src="hero"/>
     </view>
@@ -45,14 +40,14 @@ export default {
 
 }
 .profileHeader__body {
-  height: 200px;
+  height: 120px;
   background-color: $green01;
   position: relative;
   image {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 100px;
+    top: 20px;
     width: 158px;
     height: 158px;
     box-sizing: border-box;

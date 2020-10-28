@@ -5,9 +5,10 @@ import Taro from '@tarojs/taro'
 const App = createApp({
   onShow (options) {
     Taro.$capsuleWitdh = Taro.getMenuButtonBoundingClientRect().width;
+    Taro.$capsuleHeight = Taro.getMenuButtonBoundingClientRect().height;
     Taro.getSystemInfo({})
       .then(res  => {
-        Taro.$navBarMarginTop =  res.statusBarHeight || 0
+        Taro.$statusBarHeight =  res.statusBarHeight || 0
         Taro.$screenHeight = res.screenHeight || 0
       })
   },

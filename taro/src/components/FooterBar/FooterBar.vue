@@ -35,6 +35,7 @@ export default {
     display: flex;
     justify-content: space-evenly;
     height: 83.5px;
+    background-color: $gray01;
   }
 }
 </style>

@@ -1,19 +1,32 @@
 <template>
     <view class="profileTab__wrap">
       <view class="profileTab__header">
-        <view class="profileTab__header__text">
+        <view class="profileTab__header__text profileTab__header__text--active">
           Posts
         </view>
         <view class="profileTab__header__text">
           Photos
         </view>
       </view>
+      <view class="profileTab__body">
+        <feed-list-item />
+        <feed-list-item />
+        <feed-list-item />
+        <feed-list-item />
+        <feed-list-item />
+        <feed-list-item />
+        <feed-list-item />
+        <feed-list-item />
+        <feed-list-item />
+        <feed-list-item />
+      </view>
     </view>
 </template>
 <script lang="ts">
+import FeedListItem from "@components/FeedListItem/FeedListItem.vue";
 export default {
   name: 'ProfileTab',
-  components: {}
+  components: {FeedListItem}
 }
 </script>
 <style lang="scss" >
@@ -29,6 +42,14 @@ export default {
   display: flex;
   &__text {
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &--active {
+      color: $green01;
+      border-radius: 100px;
+      background-color: $white;
+    }
   }
 }
 </style>
